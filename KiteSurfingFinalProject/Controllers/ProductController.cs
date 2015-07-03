@@ -18,7 +18,7 @@ namespace KiteSurfingFinalProject.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.user);
+            var products = db.Products.Include(p => p.user );
             return View(products.ToList());
         }
 
