@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<KiteSurfingFinalProject.Models.Product>
 
+
 @{
-    Layout = null;
+    
+    ViewBag.Title = "Index";
 }
 
 <!DOCTYPE html>
@@ -12,9 +14,10 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
+    <p class="margin-top-20" style="margin-top:20px"}>
+        @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "mybtn" })
     </p>
+
     <table class="table">
         <tr>
             @*<th>

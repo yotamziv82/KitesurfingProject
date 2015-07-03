@@ -22,3 +22,19 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Adding a button design*/
+a.mybtn {
+    background: #0026ff;
+    color: #fff;
+    display: inline-block;
+    padding: 6px 12px 6px 12px;
+    text-decoration: none;
+}
+
+/* Top margin for all site*/
+
+.margin-top-20{
+    margin-top:20px;
+}
+
