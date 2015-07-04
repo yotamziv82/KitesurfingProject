@@ -761,8 +761,9 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  background-color: rgba(32, 73, 208, 0.73);
+  background-color: transparent;
 }
+      /*rgba(32, 73, 208, 0.73);*/
 
 
 .container:before,

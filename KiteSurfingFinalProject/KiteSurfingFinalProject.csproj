@@ -278,9 +278,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201506281717185_Initial.resx">
       <DependentUpon>201506281717185_Initial.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506291134519_MySecondMig.resx">
       <DependentUpon>201506291134519_MySecondMig.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
