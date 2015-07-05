@@ -1,33 +1,39 @@
 ﻿@model IEnumerable<KiteSurfingFinalProject.Models.Product>
+
+@*@model PagedList.IPagedList<KiteSurfingFinalProject.Models.Product>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />*@
 @{
-    <link href="~/Content/Gridmvc.css" rel="stylesheet" /> 
-}
+        <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+    }
 
 @{
-    
+
     ViewBag.Title = "Index";
 }
+
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Products</title>
 </head>
 @*<body style="background-color:rgba(30, 47, 183, 0.25)";>*@
-<body style="background-image: url('http://www.somosmundo.com/wp-content/uploads/2014/11/Jericoacoara-2.jpg')";>
+<body style="background-image: url('http://www.somosmundo.com/wp-content/uploads/2014/11/Jericoacoara-2.jpg')" ;>
     <p class=" margin-top-20" style="margin-top:20px" }>
         @Html.ActionLink("Create New", "Create", null, htmlAttributes: new { @class = "mybtn" })
     </p>
     @*Search button*@
-    @using (Html.BeginForm())
+    @using (Html.BeginForm())  
     {
         <p>
-            Search Name: @Html.TextBox("Search_Data", ViewBag.FilterValue as string)
+            Search Name: @Html.TextBox("Search_Data", ViewBag.FilterValue as string) 
+            @*<a href="~/Views/Product/Index.cshtml"></a>*@
             <input type="submit" value="Find" />
         </p>
-    } 
+    }
 
     <table class="table">
         <tr>
@@ -42,22 +48,24 @@
                 @Html.ActionLink("Company", "Index", new { Sorting_Order = ViewBag.SortingName })
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Size)
+                @*@Html.DisplayNameFor(model => model.Size)*@
+                @Html.ActionLink("Size", "Index", new { Sorting_Order = ViewBag.SortingName })
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.Year)*@
-                @Html.ActionLink("Year", "Index", new { Sorting_Order = ViewBag.SortingName })
+                @Html.ActionLink("Year", "Index", new { Sorting_Order = ViewBag.SortingName})
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @*@Html.DisplayNameFor(model => model.Description)*@
+                @Html.ActionLink("Description", "Index", new { Sorting_Order = ViewBag.SortingName})
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.Price)*@
-                @Html.ActionLink("Price", "Index", new { Sorting_Order = ViewBag.SortingName })
+                @Html.ActionLink("Price", "Index", new { Sorting_Order = ViewBag.SortingName})  @*, Filter_Value = ViewBag.FilterValue*@
             </th>
             <th>
                 @*@Html.DisplayNameFor(model => model.Date)*@
-                @Html.ActionLink("Date", "Index", new { Sorting_Order = ViewBag.SortingDate })
+                @Html.ActionLink("Date", "Index", new { Sorting_Order = ViewBag.SortingDate})
             </th>
             <th></th>
         </tr>
@@ -98,5 +106,9 @@
         }
 
     </table>
+    @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, Page_No => Url.Action("Index",
+    new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))*@
+
 </body>
 </html>

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using KiteSurfingFinalProject.DAL;
 using KiteSurfingFinalProject.Models;
+using PagedList;
 
 namespace KiteSurfingFinalProject.Controllers
 {
@@ -23,36 +24,80 @@ namespace KiteSurfingFinalProject.Controllers
         //}
 
         // GET: Product
-        public ActionResult Index(string Sorting_Order, string Search_Data)
+        public ActionResult Index(string Sorting_Order, string Search_Data) // , string Filter_Value, int? Page_No
         {
+            //ViewBag.CurrentSortOrder = Sorting_Order;
             ViewBag.SortingName = String.IsNullOrEmpty(Sorting_Order) ? "Company_Name" : "";
             ViewBag.SortingDate = Sorting_Order == "Date_Surf" ? "Date_Description" : "Date";
+
+            //if (Search_Data != null)
+            //{
+            //    Page_No = 1;
+            //}
+            //else
+            //{
+            //    Search_Data = Filter_Value;
+            //}
+
+            //ViewBag.FilterValue = Search_Data;
+
             var products = from stu in db.Products select stu;
-            if (Search_Data != null)
+
+            switch (Search_Data)
             {
-                products = products.Where(pro => pro.Company.ToUpper().Contains(Search_Data.ToUpper())
-                    || pro.Description.Contains(Search_Data.ToUpper()));
+                case null:  // Performing Sorting
+                    {
+                        switch (Sorting_Order)
+                        {
+                            case "Company_Name":
+                                products = products.OrderByDescending(pro => pro.Company);
+                                break;
+                            case "Date_Surf":
+                                products = products.OrderBy(pro => pro.Date);
+                                break;
+                            case "Date_Description":
+                                products = products.OrderByDescending(pro => pro.Date);
+                                break;
+                            default:
+                                products = products.OrderBy(pro => pro.Company);
+                                break;
+                        }
+                        return View(products.ToList());
+                    }
+
+                case "":
+                    {
+                        switch (Sorting_Order)
+                        {
+                            case "Company_Name":
+                                products = products.OrderByDescending(pro => pro.Company);
+                                break;
+                            case "Date_Surf":
+                                products = products.OrderBy(pro => pro.Date);
+                                break;
+                            case "Date_Description":
+                                products = products.OrderByDescending(pro => pro.Date);
+                                break;
+                            default:
+                                products = products.OrderBy(pro => pro.Company);
+                                break;
+                        }
+                        return View(products.ToList());
+                    }
+
+                default:    // Performing Search
+                    {
+                        products = products.Where(pro => pro.Company.ToUpper().Contains(Search_Data.ToUpper())
+                            || pro.Description.Contains(Search_Data.ToUpper()));
+                    }
+                    return View(products.ToList());
+                    //int Size_Of_Page = 4;
+                    //int No_Of_Page = (Page_No ?? 1);
+                    //return View(products.ToPagedList(No_Of_Page, Size_Of_Page));
             }
-            else
-            {
-                switch (Sorting_Order)
-                {
-                    case "Company_Name":
-                        products = products.OrderByDescending(pro => pro.Company);
-                        break;
-                    case "Date_Surf":
-                        products = products.OrderBy(pro => pro.Date);
-                        break;
-                    case "Date_Description":
-                        products = products.OrderByDescending(pro => pro.Date);
-                        break;
-                    default:
-                        products = products.OrderBy(pro => pro.Company);
-                        break;
-                }
-            }
-            return View(products.ToList());
+
         }
+
 
         // GET: Product/Details/5
         public ActionResult Details(int? id)
