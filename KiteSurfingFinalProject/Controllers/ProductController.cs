@@ -94,6 +94,26 @@ namespace KiteSurfingFinalProject.Controllers
                     //int Size_Of_Page = 4;
                     //int No_Of_Page = (Page_No ?? 1);
                     //return View(products.ToPagedList(No_Of_Page, Size_Of_Page));
+
+        //                                           // GET: Product/All
+        //public PartialViewResult All()
+        //{
+        //    List<Product> model = db.Products.ToList();
+        //    return PartialView("Product", model);
+        //}
+        //// GET: Product/NewestPosts
+        //public PartialViewResult NewestPosts()
+        //{
+        //    List<Product> model = db.Products.OrderByDescending(x => x.Date).Take(30).ToList();
+        //    return PartialView("Product", model);
+        //}
+        //// GET: Product/MostExpesive
+        //public PartialViewResult MostExpesive()
+        //{
+        //    List<Product> model = db.Products.OrderByDescending(x => x.Price).Take(30).ToList();
+        //    return PartialView("Product", model);
+        //}
+
             }
 
         }

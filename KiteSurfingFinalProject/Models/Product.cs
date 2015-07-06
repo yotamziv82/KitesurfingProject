@@ -22,7 +22,7 @@ namespace KiteSurfingFinalProject.Models
         public DateTime Date { get; set; }
 
         public virtual User user { get; set; }
-        public virtual ICollection<ProductType> ProductType { get; set; }
+        public virtual ProductType ProductType { get; set; }
 
     }
 }

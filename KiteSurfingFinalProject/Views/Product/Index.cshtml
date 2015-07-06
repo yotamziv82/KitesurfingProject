@@ -34,8 +34,37 @@
             <input type="submit" value="Find" />
         </p>
     }
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 
-    <table class="table">
+    @Ajax.ActionLink("All", "All", new AjaxOptions() 
+                                { 
+                                    HttpMethod = "GET",
+                                    UpdateTargetId = "divProducts",
+                                    InsertionMode = InsertionMode.Replace
+                                })
+<span style="color:blue"> | </span>
+    @Ajax.ActionLink("Newest Posts", "NewestPosts", new AjaxOptions()
+                                {
+                                    HttpMethod = "GET",
+                                    UpdateTargetId = "divProducts",
+                                    InsertionMode = InsertionMode.Replace
+                                })
+    <span style="color:blue"> | </span>
+    @Ajax.ActionLink("Most Expesive", "MostExpesive", new AjaxOptions()
+                                {
+                                    HttpMethod = "GET",
+                                    UpdateTargetId = "divProducts",
+                                    InsertionMode = InsertionMode.Replace
+                                })
+    
+
+    <div id="divProducts">
+
+    </div>
+
+
+    <table class="table" style="border:1px solid double">
         <tr>
             @*<th>
                     @Html.DisplayNameFor(model => model.user.FirstName)

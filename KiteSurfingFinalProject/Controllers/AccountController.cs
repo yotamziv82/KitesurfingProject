@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using KiteSurfingFinalProject.Models;
+using KiteSurfingFinalProject.DAL;
 
 namespace KiteSurfingFinalProject.Controllers
 {
@@ -77,7 +78,19 @@ namespace KiteSurfingFinalProject.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    {
+                        string id = User.Identity.GetUserId();
+                        UserContext db = new UserContext();
+                        var UserQuery = (from u in db.Users
+                                         where id.Equals(u.UserID)
+                                         select u).ToList();
+                        if (UserQuery==null)
+                        {
+                            Session["UserId"] = User.Identity.GetUserId();
+                            return RedirectToAction("Edit", "AddUserInfo");
+                        }
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
