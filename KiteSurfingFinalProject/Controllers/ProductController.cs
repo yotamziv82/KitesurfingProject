@@ -41,7 +41,7 @@ namespace KiteSurfingFinalProject.Controllers
 
             //ViewBag.FilterValue = Search_Data;
 
-            var products = from stu in db.Products select stu;
+            var products = from pro in db.Products select pro;
 
             switch (Search_Data)
             {
